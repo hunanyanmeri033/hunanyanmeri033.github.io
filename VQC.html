@@ -33,7 +33,7 @@ Background
                     <p style="white-space:pre-wrap">
                         
 <span style="font-size:30px">Methodology</span>
-Preprocess<br>
+<span style="font-size:25px">Preprocess<br></span>
 
     The first step is to convert all data into fingerprints.
     Then apply scaffold sampling. <span style="color:rgb(96, 96, 96)">Scaffold sampling groups molecules based on Bemis-Murcko scaffold representation, then splits those groups into the train, val, test. So if it splits them into G1, G2, G3, G4, G5 it might put G1 and 2 into train, G3 and G4 into validation and G5 into test. It makes sure the model is generalizing to unseen molecule structures. This sampling method is widely used in research papers, but is not random.</span>
@@ -42,10 +42,11 @@ Preprocess<br>
     Then I apply Principal Component Analysis(PCA) to reduce the number of features from 2048 to a given amount. <span style="color:rgb(96, 96, 96)">This is done because I would need 2048 qubits for 2048 features and that is impossible for current classical computers to simulate.</span>
 
                     </p>
-                    <img class="img3" src='flowchart.png' alt="Image of a sin function">
+                    <img class="img" src='flowchart.png' alt="Image of a sin function" style="width:400px;height:430px">
                 </div>
-                
+                <span style="font-size:25px">Training</span>
                 <div>
+                    
                     <p>For training we need to define a cost function and initialize random parameters</p>
                 </div>
                 
@@ -56,11 +57,13 @@ Preprocess<br>
                     <p>We also have to encode our classical data into a quantum state because the computer can't understand classical data. There are multiple data encoding stradegies but angle encoding is the one I used. For angle encoding you need to have as much qubits as features youre encoding at a time. This is a limitation. If we have a 200 feature dataset, we need 200 qubits, but we can't simulate that.</p>
                     <p>After encoding the data comes the ansatz. </p>
                     </div>
-                    <img class="img4" src="flowchart2.png" alt="image of flowchart" >
+                    <img class="img" src="flowchart2.png" alt="image of flowchart" style="width:320px;height:150px">
 
                 </div>
                 <p>There are differences between model performance based on what ansatz you choose, you can find more on that in my 2026 - current project.</p>
                 <p>For this project I used this ansatz: </p>
+                <img class="img" src='ansatzcode.png' alt="Image of a sin function" style="width:300px;height:200px">
+                <div class = 'line' style = "margin-top:5%;margin-left: 2.5%;margin-right:2.5%;width:95%"></div>
             </div>
         </div>
 
