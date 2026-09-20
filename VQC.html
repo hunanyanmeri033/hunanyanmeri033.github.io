@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>VQC</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+
+        <meta charset="utf-8">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+
+    </head>
+
+    <body>
+        <div class = 'mainwindow' display: flex;flex-direction: column;gap: 20px;max-width: 400px;padding: 20px;border: 1px solid #ccc;border-radius: 8px;>
+            <div style="background-color:pink;height:80px;font-size: 35px;padding:10px;margin-top:0px;margin-left:30px">
+                Variational Quantum Circuit
+                <p style="white-space: pre-wrap;font-size: 12px;margin-top: -2px;"><a href="https://github.com/hunanyanmeri033/ISEF2025-2027.git">Github</a></p>
+                <p style="white-space: pre-wrap;font-size: 12px;margin-top: -2px;"><a href="https://docs.google.com/document/d/1jlg3CUo__HCPZWOgaxVcyINkW24oObZmo0SOCl731SQ/edit?tab=t.0">Logbook</a></p>
+            </div>
+            <div style = 'margin-left: 30px;margin-top: 10px;'>
+                <p style='margin-bottom:0px'>Evaluating Classical Preprocessing vs. Quantum Circuit Complexity in Hybrid Models for Molecular Activity Prediction</p><br>
+                <p style = 'white-space: pre-wrap;font-size:30px'>
+Background
+                    
+                </p>
+                <p style="white-space: pre-wrap;padding:0px;align-self: self-start;margin-top: 0px;font-size: 15px;line-height: 1.25;"><span style = "font-size: 30px;">Resources:</span><br>    Pennylane VQC demo: <a href = 'https://pennylane.ai/demos/tutorial_variational_classifier'>Code</a>
+    To what extent do the quantum and classical components contribute to hybrid performance: <a href = 'https://arxiv.org/html/2601.04732v1'>Research Paper</a>
+    Barren Plateu: <a href = 'https://arxiv.org/pdf/1803.11173'>Research Paper</a>
+    Dimensionality Reduction Techniques: <a href = 'https://www.ibm.com/think/topics/dimensionality-reduction'>Website</a>
+    Data reuploading for a uniersal quantum classifier: <a href = 'https://ar5iv.labs.arxiv.org/html/1907.02085#:~:text=This%20paper%20is%20structured%20as,are%20exposed%20in%20Section%207'>Research Paper</a></p> 
+    <div class = 'line1' style = 'margin-left: -10px;'></div>            
+    <div style="display: flex; direction: row; align-items: center; justify-content: space-between; gap: 10px; padding: 0px;margin-bottom: 0px;">
+                    
+                    <p style="white-space:pre-wrap">
+                        
+<span style="font-size:30px">Methodology</span>
+Preprocess<br>
+
+    The first step is to convert all data into fingerprints.
+    Then apply scaffold sampling. <span style="color:rgb(96, 96, 96)">Scaffold sampling groups molecules based on Bemis-Murcko scaffold representation, then splits those groups into the train, val, test. So if it splits them into G1, G2, G3, G4, G5 it might put G1 and 2 into train, G3 and G4 into validation and G5 into test. It makes sure the model is generalizing to unseen molecule structures. This sampling method is widely used in research papers, but is not random.</span>
+    Then I sample 50 positive cases and negative cases from every split. And create train, val, test splits of 100 cases.
+    Scale to (-pi,pi) using min max scaler. <span style="color:rgb(96, 96, 96)">This ensure that the data is within the correct input range for angle encoding.</span>
+    Then I apply Principal Component Analysis(PCA) to reduce the number of features from 2048 to a given amount. <span style="color:rgb(96, 96, 96)">This is done because I would need 2048 qubits for 2048 features and that is impossible for current classical computers to simulate.</span>
+
+                    </p>
+                    <img class="img3" src='flowchart.png' alt="Image of a sin function">
+                </div>
+                
+                <div>
+                    <p>For training we need to define a cost function and initialize random parameters</p>
+                </div>
+                
+                <div style="display: flex; direction: row; align-items: center; justify-content: space-between; gap: 10px; padding: 0px;margin-bottom: 0px;">
+                    <div>
+                    <p>During training the model is trying to optimize the parameters to reduce the cost function. Parameters are updated using gradient stradegies, like for example gradient descent:<br> \(\Theta_{n+1}=\Theta_{n}-a\nabla f(\Theta_{n})\).</p>.
+                    <p> The optimizer is chosen before training: opt = qp.AdamOptimizer(0.3) and in the training loop we tell the optimizer to 'take a step'(update the parameters):<br> weights, _, _ = opt.step(cost, weights, x_batch, y_batch)</p>
+                    <p>We also have to encode our classical data into a quantum state because the computer can't understand classical data. There are multiple data encoding stradegies but angle encoding is the one I used. For angle encoding you need to have as much qubits as features youre encoding at a time. This is a limitation. If we have a 200 feature dataset, we need 200 qubits, but we can't simulate that.</p>
+                    <p>After encoding the data comes the ansatz. </p>
+                    </div>
+                    <img class="img4" src="flowchart2.png" alt="image of flowchart" >
+
+                </div>
+                <p>There are differences between model performance based on what ansatz you choose, you can find more on that in my 2026 - current project.</p>
+                <p>For this project I used this ansatz: </p>
+            </div>
+        </div>
+
+    </body>
+
+</html>

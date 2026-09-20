@@ -1,0 +1,43 @@
+div {
+  color: black;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  border-radius: 10px;
+}
+
+.mainwindow {
+    overflow-y: auto;
+    height:100%;    
+}
+
+.box {
+    padding: 2.5%;
+    width:90%;
+    padding:2.5%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+
+
+.line {
+    border-bottom: 1px solid #3E48B2;
+}
+
+
+
+.img {
+    width: 200px;         /* Force a specific width */
+    height: 100px;        /* Force a specific height */
+    object-fit: cover; 
+    margin-right:2.5%;
+     margin-top:1%
+}
+
+
+.button {
+    margin-left: 2.5%;
+    margin-right:2.5%;
+}
+
